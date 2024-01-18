@@ -148,6 +148,7 @@ const internalCaptureWebsite = async (input, options) => {
 	try {
 		browser = options._browser || await puppeteer.launch(launchOptions);
 		page = await browser.newPage();
+		options.timeZone && await page.emulateTimezone(options.timeZone);
 
 		if (options.blockAds) {
 			const blocker = await PuppeteerBlocker.fromPrebuiltFull(fetch, {
